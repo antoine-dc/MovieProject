@@ -3,8 +3,9 @@ import MovieList from '@/components/MovieList.vue'
 import axios from 'axios';
 import { ref } from 'vue'
 
+let key = import.meta.env.VITE_KEY_API;
 let data = ref({}) // On créé une variable référence, qui pourra être utilisée dans le template
-let urlAPI = 'https://api.themoviedb.org/3/movie/popular?api_key=b8784e79c57339a259c473aaa7bdab93&language=fr-FR'; // Un exemple d'API simple
+let urlAPI = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=fr-FR`; // Un exemple d'API simple
 
 async function loadData() {
   await axios.get(urlAPI)

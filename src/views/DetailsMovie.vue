@@ -41,11 +41,12 @@ import axios from 'axios';
 import { ref } from 'vue'
 
 let id = useRoute().params.id;
+let key = import.meta.env.VITE_KEY_API;
 // ${this.$route.params.id}
 let data = ref({}) ;// On créé une variable référence, qui pourra être utilisée dans le template
 let dataActors = ref({}) ;
-let urlAPI = `https://api.themoviedb.org/3/movie/${parseInt(id)}?api_key=b8784e79c57339a259c473aaa7bdab93&language=fr-FR`; // Un exemple d'API simple
-let urlAPIActors = `https://api.themoviedb.org/3/movie/${parseInt(id)}/credits?api_key=b8784e79c57339a259c473aaa7bdab93&language=fr-FR`; 
+let urlAPI = `https://api.themoviedb.org/3/movie/${parseInt(id)}?api_key=${key}&language=fr-FR`; // Un exemple d'API simple
+let urlAPIActors = `https://api.themoviedb.org/3/movie/${parseInt(id)}/credits?api_key=${key}&language=fr-FR`; 
 
 
 async function loadData() {
