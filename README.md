@@ -1,6 +1,12 @@
-# tp
+# Movie Project
 
 This template should help get you started developing with Vue 3 in Vite.
+
+## Install project
+
+Create API Key with https://developers.themoviedb.org/3
+Insert key in file : .env.test
+And rename file .env.test --> .env
 
 ## Recommended IDE Setup
 
