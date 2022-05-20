@@ -5,16 +5,26 @@ import { ref } from 'vue'
 
 let key = import.meta.env.VITE_KEY_API;
 let data = ref({}) // On créé une variable référence, qui pourra être utilisée dans le template
-let urlAPI = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=fr-FR`; // Un exemple d'API simple
+let dataTrending = ref({})
+
 
 async function loadData() {
+  let urlAPI = `https://api.themoviedb.org/3/movie/popular?api_key=${key}&language=fr-FR`; // Un exemple d'API simple
   await axios.get(urlAPI)
     .then((response) =>
       data.value = response.data.results // On précise le .data mais ça dépendra des API
     )
+}
 
+async function loadDataTrending() {
+  let urlAPI = `https://api.themoviedb.org/3/trending/movie/day?api_key=${key}&language=fr-FR`; // Un exemple d'API simple
+  await axios.get(urlAPI)
+    .then((response) =>
+      dataTrending.value = response.data.results // On précise le .data mais ça dépendra des API
+    )
 }
 loadData(); // On lance la fonction pour récupérer les données de l'API
+loadDataTrending();
 
 </script>
 
@@ -34,7 +44,7 @@ loadData(); // On lance la fonction pour récupérer les données de l'API
         <button class="no-active">Cette semaine</button>
       </div>
       <div class="grid-tendances">
-        <MovieList v-for="item in data" :key="item.id" :title="item.title" :date="item.release_date"
+        <MovieList v-for="item in dataTrending" :key="item.id" :title="item.title" :date="item.release_date"
           :score="item.vote_average * 10" :id="item.id">      
           <template #image>
             <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face/${item.poster_path}`" alt="Hypnotic" />
@@ -53,38 +63,12 @@ loadData(); // On lance la fonction pour récupérer les données de l'API
         <button class="no-active">Cinéma</button>
       </div>
       <div class="grid-tendances">
-        <div class="movie">
-          <img src="@/assets/images/greys.jpg" alt="" />
-          <div class="score">
-            <p>80%</p>
-          </div>
-          <h5>Grey's Anatomy</h5>
-          <p>15 sept 2021</p>
-        </div>
-        <div class="movie">
-          <img src="@/assets/images/got.jpg" alt="" />
-          <div class="score">
-            <p>80%</p>
-          </div>
-          <h5>Game of Thrones</h5>
-          <p>15 sept 2021</p>
-        </div>
-        <div class="movie">
-          <img src="@/assets/images/mortal.jpg" alt="" />
-          <div class="score">
-            <p>80%</p>
-          </div>
-          <h5>Mortal Kombat</h5>
-          <p>15 sept 2021</p>
-        </div>
-        <div class="movie">
-          <img src="@/assets/images/lucas.jpg" alt="" />
-          <div class="score">
-            <p>80%</p>
-          </div>
-          <h5>Luca</h5>
-          <p>15 sept 2021</p>
-        </div>
+           <MovieList v-for="item in data" :key="item.id" :title="item.title" :date="item.release_date"
+          :score="item.vote_average * 10" :id="item.id">      
+          <template #image>
+            <img :src="`https://www.themoviedb.org/t/p/w220_and_h330_face/${item.poster_path}`" alt="Hypnotic" />
+          </template>
+        </MovieList>
       </div>
     </div>
   </div>

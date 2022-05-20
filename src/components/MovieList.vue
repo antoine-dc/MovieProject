@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/details-films/${id}`">
+  <router-link :to="`/details-films/${id}`" class="container-movie">
     <div class="movie">
         <slot name="image"></slot>
         <div class="score">
@@ -24,14 +24,15 @@ defineProps({
 <style lang="scss" >
 //********** Footer **********//
 $accent-color: #032541;
-a{
+.container-movie{
     text-decoration: none;
+    width: 25%;
+    min-width: 300px;
 }
 .movie {
     margin-bottom: 20px;
     cursor: pointer;
-    width: 25%;
-    min-width: 300px;
+  
     color:black;
 
 
