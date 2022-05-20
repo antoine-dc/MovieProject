@@ -13,6 +13,11 @@ const router = createRouter({
       name: "details-films",
       component: () => import("../views/DetailsMovie.vue"),
     },
+    {
+      path: "/search/:search",
+      name: "search",
+      component: () => import("../views/SearchMovie.vue"),
+    },
   ],
 })
 

@@ -6,6 +6,7 @@ import { ref } from 'vue'
 let key = import.meta.env.VITE_KEY_API;
 let data = ref({}) // On créé une variable référence, qui pourra être utilisée dans le template
 let dataTrending = ref({})
+let valueSearch = ref("")
 
 
 async function loadData() {
@@ -32,8 +33,9 @@ loadDataTrending();
   <!-- Content -->
 
   <div class="search-container">
-    <input type="text" placeholder="Rechercher un film" />
-    <button type="submit"><i class="fas fa-search"></i></button>
+    <input type="text" placeholder="Rechercher un film" v-model="valueSearch"/>
+    <router-link :to="`/search/${valueSearch}`">
+    <button type="submit"><i class="fas fa-search"></i></button></router-link>
   </div>
 
   <div class="wrapper">
